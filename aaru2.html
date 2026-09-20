@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>I Know You're Angry</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #dcd2d9;
+      color: #000000;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      padding: 30px 24px 35px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+
+    /* =========================
+       PART 1
+       ========================= */
+
+    .part-one {
+      min-height: 255px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 10px;
+    }
+
+    .title-line {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      color: #000000;
+      font-size: clamp(30px, 8vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .question-line {
+      margin-top: 13px;
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      color: #000000;
+      font-size: clamp(24px, 6.5vw, 33px);
+      line-height: 1.15;
+    }
+
+
+    /* =========================
+       PART 2
+       ========================= */
+
+    .part-two {
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 2px;
+    }
+
+    .slider-area {
+      position: relative;
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .slider-track {
+      position: relative;
+      width: 100%;
+      height: 34px;
+    }
+
+
+    /* =========================
+       SLIDER
+       ========================= */
+
+    #my-slider {
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 100%;
+      height: 7px;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      background: #000000;
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      z-index: 3;
+    }
+
+
+    /* Slider Thumb */
+
+    #my-slider::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+
+      width: 25px;
+      height: 25px;
+
+      border-radius: 50%;
+
+      background: #f1e8ed;
+
+      border: 3px solid #000000;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+    }
+
+    #my-slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+
+      border-radius: 50%;
+
+      background: #f1e8ed;
+
+      border: 3px solid #000000;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+    }
+
+
+    /* =========================
+       SLIDER MARKERS
+       ========================= */
+
+    .marker {
+      position: absolute;
+      top: 3px;
+
+      width: 17px;
+      height: 17px;
+
+      border-radius: 50%;
+
+      background: #000000;
+
+      transform: translateX(-50%);
+
+      z-index: 1;
+
+      pointer-events: none;
+    }
+
+    .m25 {
+      left: 25%;
+    }
+
+    .m50 {
+      left: 50%;
+    }
+
+    .m75 {
+      left: 75%;
+    }
+
+    .m100 {
+      left: 100%;
+    }
+
+
+    /* =========================
+       SLIDER LABELS
+       ========================= */
+
+    .marker-labels {
+      position: relative;
+
+      height: 105px;
+
+      margin-top: 14px;
+
+      font-family: "Poppins", sans-serif;
+
+      color: #000000;
+
+      font-size: 11px;
+
+      line-height: 1.35;
+    }
+
+    .marker-label {
+      position: absolute;
+
+      top: 0;
+
+      width: 82px;
+
+      text-align: center;
+
+      transform: translateX(-50%);
+    }
+
+    .marker-label strong {
+      display: block;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+      margin-bottom: 3px;
+
+      color: #000000;
+    }
+
+    .l25 {
+      left: 25%;
+    }
+
+    .l50 {
+      left: 50%;
+    }
+
+    .l75 {
+      left: 75%;
+    }
+
+
+    /* 100% LABEL */
+
+    .l100 {
+      left: 100%;
+
+      transform: translateX(-100%);
+
+      width: 125px;
+
+      text-align: right;
+
+      padding-right: 5px;
+    }
+
+
+    /* =========================
+       CURRENT SLIDER VALUE
+       ========================= */
+
+    .slider-value {
+      text-align: center;
+
+      font-family: "Poppins", sans-serif;
+
+      font-size: 12px;
+
+      color: #000000;
+
+      margin-top: 3px;
+
+      min-height: 18px;
+    }
+
+
+    /* =========================
+       PART 3
+       ========================= */
+
+    .part-three {
+      min-height: 315px;
+
+      flex: 1;
+
+      position: relative;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding-bottom: 18px;
+    }
+
+    .gif-container {
+      width: 230px;
+      height: 230px;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+    .emotion-gif {
+      display: none;
+
+      max-width: 100%;
+      max-height: 100%;
+
+      object-fit: contain;
+
+      border-radius: 20px;
+    }
+
+    .emotion-gif.active {
+      display: block;
+
+      animation: appear 0.3s ease;
+    }
+
+
+    /* =========================
+       NEXT BUTTON
+       ========================= */
+
+    .next-button {
+      position: absolute;
+
+      bottom: 3px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: 190px;
+      height: 65px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 12px;
+
+      background: #e9a9c3;
+
+      color: #222222;
+
+      text-decoration: none;
+
+      border-radius: 40px;
+
+      font-family: "Poppins", sans-serif;
+
+      font-size: 28px;
+
+      font-weight: 500;
+
+      box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.12);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .next-button span {
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .next-button:hover {
+      box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    .next-button:active {
+      transform:
+        translateX(-50%)
+        scale(0.96);
+    }
+
+
+    /* =========================
+       GIF ANIMATION
+       ========================= */
+
+    @keyframes appear {
+
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
+    /* =========================
+       MUSIC BUTTON
+       ========================= */
+
+    .music-toggle {
+      position: fixed;
+
+      right: 16px;
+      bottom: 16px;
+
+      z-index: 9999;
+
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      border: none;
+
+      background: #777b82;
+
+      color: #ffffff;
+
+      font-size: 19px;
+
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.22);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+    }
+
+    .music-toggle.paused {
+      background: #a0a0a0;
+    }
+
+
+    /* =========================
+       SMALL SCREEN
+       ========================= */
+
+    @media (max-width: 370px) {
+
+      .page {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .marker-label {
+        width: 68px;
+        font-size: 10px;
+      }
+
+      .l100 {
+        width: 115px;
+        padding-right: 3px;
+      }
+
+      .gif-container {
+        width: 205px;
+        height: 205px;
+      }
+
+      .next-button {
+        width: 175px;
+        height: 60px;
+        font-size: 25px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="page">
+
+
+    <!-- =========================
+         PART 1
+         ========================= -->
+
+    <section class="part-one">
+
+      <div class="title-line">
+        I Know You're Angry
+      </div>
+
+      <div class="question-line">
+        But How Much....?
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PART 2
+         ========================= -->
+
+    <section class="part-two">
+
+      <div class="slider-area">
+
+        <div class="slider-track">
+
+          <span class="marker m25"></span>
+
+          <span class="marker m50"></span>
+
+          <span class="marker m75"></span>
+
+          <span class="marker m100"></span>
+
+
+          <input
+            type="range"
+            id="my-slider"
+            min="0"
+            max="100"
+            value="0"
+            aria-label="How angry are you?"
+          >
+
+        </div>
+
+
+        <!-- Slider Labels -->
+
+        <div class="marker-labels">
+
+          <div class="marker-label l25">
+
+            <strong>25%</strong>
+
+            Little bit
+
+          </div>
+
+
+          <div class="marker-label l50">
+
+            <strong>50%</strong>
+
+            Moderate
+
+          </div>
+
+
+          <div class="marker-label l75">
+
+            <strong>75%</strong>
+
+            Angry
+
+          </div>
+
+
+          <div class="marker-label l100">
+
+            <strong>100%</strong>
+
+            Very<br>
+            Much Angry
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="slider-value"
+          class="slider-value"
+        >
+          Move the slider
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PART 3
+         ========================= -->
+
+    <section class="part-three">
+
+
+      <div class="gif-container">
+
+
+        <!-- 25% GIF -->
+
+        <img
+          id="gif25"
+          class="emotion-gif"
+          src="https://i.ibb.co/tMmJ3FP3/akko-little-witch-pout.gif"
+          alt="Little bit angry"
+        >
+
+
+        <!-- 50% GIF -->
+
+        <img
+          id="gif50"
+          class="emotion-gif"
+          src="https://i.ibb.co/yBNc8FH3/angry.gif"
+          alt="Moderately angry"
+        >
+
+
+        <!-- 75% GIF -->
+
+        <img
+          id="gif75"
+          class="emotion-gif"
+         src="https://i.ibb.co/zVbRX3Hm/fiamani-cat.gif"
+          alt="Very angry"
+        >
+
+
+        <!-- 100% GIF -->
+
+        <img
+          id="gif100"
+          class="emotion-gif"
+          src="https://i.ibb.co/Z6kwt2xW/b04636d299ed07bbb69e61cc5027aac4.gif"
+          alt="Very very angry"
+        >
+
+      </div>
+
+
+      <!-- NEXT BUTTON -->
+
+      <a
+        href="next.html"
+        class="next-button"
+      >
+        Next <span>→</span>
+      </a>
+
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================
+       MUSIC
+       ========================= -->
+
+  <button
+    id="musicToggle"
+    class="music-toggle paused"
+    aria-label="Toggle music"
+  >
+    🔈
+  </button>
+
+
+  <audio
+    id="bgMusic"
+    src="https://files.catbox.moe/mk050o.mp3"
+    preload="auto"
+  ></audio>
+
+
+
+  <script>
+
+
+    /* =========================
+       SLIDER
+       ========================= */
+
+    const slider =
+      document.getElementById("my-slider");
+
+    const sliderValue =
+      document.getElementById("slider-value");
+
+
+    /* GIF Elements */
+
+    const gifs = {
+
+      25:
+        document.getElementById("gif25"),
+
+      50:
+        document.getElementById("gif50"),
+
+      75:
+        document.getElementById("gif75"),
+
+      100:
+        document.getElementById("gif100")
+
+    };
+
+
+    /* Hide All GIFs */
+
+    function hideAllGifs() {
+
+      Object.values(gifs).forEach(
+        gif => {
+
+          gif.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =========================
+       UPDATE SLIDER
+       ========================= */
+
+    function updateSlider() {
+
+      const value =
+        Number(slider.value);
+
+
+      hideAllGifs();
+
+
+      /* Below 25% */
+
+      if (value < 25) {
+
+        sliderValue.textContent =
+          value + "%";
+
+        return;
+
+      }
+
+
+      /* 25% */
+
+      if (value < 50) {
+
+        sliderValue.textContent =
+          "25%";
+
+        gifs[25].classList.add(
+          "active"
+        );
+
+        return;
+
+      }
+
+
+      /* 50% */
+
+      if (value < 75) {
+
+        sliderValue.textContent =
+          "50%";
+
+
+        if (
+          gifs[50].getAttribute("src")
+        ) {
+
+          gifs[50].classList.add(
+            "active"
+          );
+
+        }
+
+        return;
+
+      }
+
+
+      /* 75% */
+
+      if (value < 100) {
+
+        sliderValue.textContent =
+          "75%";
+
+
+        if (
+          gifs[75].getAttribute("src")
+        ) {
+
+          gifs[75].classList.add(
+            "active"
+          );
+
+        }
+
+        return;
+
+      }
+
+
+      /* 100% */
+
+      sliderValue.textContent =
+        "100%";
+
+
+      if (
+        gifs[100].getAttribute("src")
+      ) {
+
+        gifs[100].classList.add(
+          "active"
+        );
+
+      }
+
+    }
+
+
+    /* Slider Event */
+
+    slider.addEventListener(
+      "input",
+      updateSlider
+    );
+
+
+    /* Initial State */
+
+    updateSlider();
+
+
+
+    /* =========================
+       BACKGROUND MUSIC
+       ========================= */
+
+    (() => {
+
+      const MUSIC_TIME_KEY =
+        "bgMusicTime";
+
+      const MUSIC_STATE_KEY =
+        "bgMusicState";
+
+
+      const audio =
+        document.getElementById(
+          "bgMusic"
+        );
+
+      const btn =
+        document.getElementById(
+          "musicToggle"
+        );
+
+
+      let savedTime =
+        parseFloat(
+          localStorage.getItem(
+            MUSIC_TIME_KEY
+          ) || "0"
+        );
+
+
+      let savedState =
+        localStorage.getItem(
+          MUSIC_STATE_KEY
+        ) || "paused";
+
+
+      /* Music Button */
+
+      function setButton(state) {
+
+        if (
+          state === "playing"
+        ) {
+
+          btn.classList.remove(
+            "paused"
+          );
+
+          btn.textContent =
+            "🔊";
+
+        } else {
+
+          btn.classList.add(
+            "paused"
+          );
+
+          btn.textContent =
+            "🔈";
+
+        }
+
+      }
+
+
+      setButton(savedState);
+
+
+      /* Load Saved Music Position */
+
+      audio.addEventListener(
+        "loadedmetadata",
+        () => {
+
+          if (
+            !Number.isNaN(savedTime) &&
+            savedTime > 0 &&
+            savedTime < audio.duration
+          ) {
+
+            audio.currentTime =
+              savedTime;
+
+          }
+
+
+          if (
+            savedState ===
+            "playing"
+          ) {
+
+            const playPromise =
+              audio.play();
+
+
+            if (
+              playPromise &&
+              playPromise.catch
+            ) {
+
+              playPromise.catch(
+                () => {
+
+                  savedState =
+                    "paused";
+
+                  setButton(
+                    "paused"
+                  );
+
+                }
+              );
+
+            }
+
+          }
+
+        }
+      );
+
+
+      /* Music Toggle */
+
+      btn.addEventListener(
+        "click",
+        () => {
+
+          if (audio.paused) {
+
+            const playPromise =
+              audio.play();
+
+
+            if (
+              playPromise &&
+              playPromise.catch
+            ) {
+
+              playPromise.catch(
+                () => {}
+              );
+
+            }
+
+
+            savedState =
+              "playing";
+
+          } else {
+
+            audio.pause();
+
+            savedState =
+              "paused";
+
+          }
+
+
+          setButton(
+            savedState
+          );
+
+
+          localStorage.setItem(
+            MUSIC_STATE_KEY,
+            savedState
+          );
+
+        }
+      );
+
+
+      /* Save Music State */
+
+      function saveState() {
+
+        localStorage.setItem(
+          MUSIC_TIME_KEY,
+          String(
+            audio.currentTime
+          )
+        );
+
+
+        localStorage.setItem(
+          MUSIC_STATE_KEY,
+          audio.paused
+            ? "paused"
+            : "playing"
+        );
+
+      }
+
+
+      /* Save Before Closing */
+
+      window.addEventListener(
+        "beforeunload",
+        saveState
+      );
+
+
+      /* Save When Leaving Page */
+
+      document.addEventListener(
+        "visibilitychange",
+        () => {
+
+          if (
+            document.visibilityState ===
+            "hidden"
+          ) {
+
+            saveState();
+
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
+
+</body>
+</html>
