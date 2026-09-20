@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>I Know You're Angry</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #dcd2d9;
+      color: #000;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      padding: 25px 20px 100px;
+
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* =========================
+       PART 1
+       ========================= */
+
+    .part-one {
+      min-height: 220px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      padding-top: 10px;
+    }
+
+    .title-line {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      color: #000;
+      font-size: clamp(29px, 8vw, 42px);
+      line-height: 1.15;
+    }
+
+    .question-line {
+      margin-top: 14px;
+
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      color: #000;
+
+      font-size: clamp(23px, 6.5vw, 33px);
+      line-height: 1.15;
+    }
+
+    /* =========================
+       PART 2
+       ========================= */
+
+    .part-two {
+      min-height: 245px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 10px 0;
+    }
+
+    .slider-area {
+      position: relative;
+      width: 100%;
+      padding: 0 8px;
+    }
+
+    .slider-track {
+      position: relative;
+      width: 100%;
+      height: 34px;
+    }
+
+    /* Slider */
+
+    #my-slider {
+      position: absolute;
+      left: 0;
+      top: 9px;
+
+      width: 100%;
+      height: 7px;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      background: #000;
+      border-radius: 10px;
+
+      outline: none;
+      cursor: pointer;
+
+      z-index: 3;
+    }
+
+    /* Chrome / Android */
+
+    #my-slider::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+
+      width: 25px;
+      height: 25px;
+
+      border-radius: 50%;
+
+      background: #f1e8ed;
+      border: 3px solid #000;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 8px rgba(0,0,0,0.16);
+    }
+
+    /* Firefox */
+
+    #my-slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+
+      border-radius: 50%;
+
+      background: #f1e8ed;
+      border: 3px solid #000;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 8px rgba(0,0,0,0.16);
+    }
+
+    /* =========================
+       MARKERS
+       ========================= */
+
+    .marker {
+      position: absolute;
+
+      top: 3px;
+
+      width: 17px;
+      height: 17px;
+
+      border-radius: 50%;
+
+      background: #000;
+
+      transform: translateX(-50%);
+
+      z-index: 1;
+
+      pointer-events: none;
+    }
+
+    .m25 {
+      left: 25%;
+    }
+
+    .m50 {
+      left: 50%;
+    }
+
+    .m75 {
+      left: 75%;
+    }
+
+    .m100 {
+      left: 100%;
+    }
+
+    /* =========================
+       LABELS
+       ========================= */
+
+    .marker-labels {
+      position: relative;
+
+      height: 105px;
+
+      margin-top: 14px;
+
+      font-size: 11px;
+      line-height: 1.35;
+
+      color: #000;
+    }
+
+    .marker-label {
+      position: absolute;
+
+      top: 0;
+
+      width: 82px;
+
+      text-align: center;
+
+      transform: translateX(-50%);
+    }
+
+    .marker-label strong {
+      display: block;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      margin-bottom: 3px;
+    }
+
+    .l25 {
+      left: 25%;
+    }
+
+    .l50 {
+      left: 50%;
+    }
+
+    .l75 {
+      left: 75%;
+    }
+
+    .l100 {
+      left: 100%;
+
+      width: 110px;
+
+      transform: translateX(-100%);
+
+      text-align: right;
+
+      padding-right: 3px;
+    }
+
+    /* Current value */
+
+    .slider-value {
+      text-align: center;
+
+      font-size: 12px;
+
+      color: #000;
+
+      margin-top: 3px;
+
+      min-height: 18px;
+    }
+
+    /* =========================
+       PART 3
+       ========================= */
+
+    .part-three {
+      flex: 1;
+
+      min-height: 300px;
+
+      position: relative;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      padding-bottom: 75px;
+    }
+
+    .gif-container {
+      width: 230px;
+      height: 230px;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+    .emotion-gif {
+      display: none;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      border-radius: 20px;
+    }
+
+    .emotion-gif.active {
+      display: block;
+
+      animation: appear 0.3s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* =========================
+       NEXT BUTTON
+       ========================= */
+
+    .next-button {
+      position: absolute;
+
+      bottom: 5px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: 180px;
+      height: 60px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      background: #e9a9c3;
+      color: #222;
+
+      text-decoration: none;
+
+      border-radius: 40px;
+
+      font-size: 23px;
+      font-weight: 500;
+
+      box-shadow:
+        0 12px 25px rgba(0,0,0,0.12);
+
+      transition: 0.2s ease;
+    }
+
+    .next-button span {
+      font-size: 27px;
+    }
+
+    .next-button:hover {
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    .next-button:active {
+      transform: translateX(-50%) scale(0.96);
+    }
+
+    /* =========================
+       MUSIC BUTTON
+       ========================= */
+
+    .music-toggle {
+      position: fixed;
+
+      right: 16px;
+      bottom: 16px;
+
+      z-index: 9999;
+
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      border: none;
+
+      background: #777b82;
+
+      color: #fff;
+
+      font-size: 19px;
+
+      box-shadow:
+        0 8px 20px rgba(0,0,0,0.22);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+    }
+
+    .music-toggle.paused {
+      background: #a0a0a0;
+    }
+
+    /* =========================
+       SMALL PHONES
+       ========================= */
+
+    @media (max-width: 370px) {
+
+      .page {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .marker-label {
+        width: 65px;
+        font-size: 10px;
+      }
+
+      .l100 {
+        width: 105px;
+      }
+
+      .gif-container {
+        width: 205px;
+        height: 205px;
+      }
+
+      .next-button {
+        width: 165px;
+        height: 56px;
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- =========================
+         PART 1
+         ========================= -->
+
+    <section class="part-one">
+
+      <div class="title-line">
+        I Know You're Angry
+      </div>
+
+      <div class="question-line">
+        But How Much....?
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PART 2
+         ========================= -->
+
+    <section class="part-two">
+
+      <div class="slider-area">
+
+        <div class="slider-track">
+
+          <span class="marker m25"></span>
+          <span class="marker m50"></span>
+          <span class="marker m75"></span>
+          <span class="marker m100"></span>
+
+          <input
+            type="range"
+            id="my-slider"
+            min="0"
+            max="100"
+            value="0"
+            aria-label="How angry are you?"
+          >
+
+        </div>
+
+
+        <div class="marker-labels">
+
+          <div class="marker-label l25">
+            <strong>25%</strong>
+            Little bit
+          </div>
+
+          <div class="marker-label l50">
+            <strong>50%</strong>
+            Moderate
+          </div>
+
+          <div class="marker-label l75">
+            <strong>75%</strong>
+            Angry
+          </div>
+
+          <div class="marker-label l100">
+            <strong>100%</strong>
+            Very<br>
+            Much Angry
+          </div>
+
+        </div>
+
+
+        <div id="slider-value" class="slider-value">
+          Move the slider
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PART 3
+         ========================= -->
+
+    <section class="part-three">
+
+      <div class="gif-container">
+
+        <img
+          id="gif25"
+          class="emotion-gif"
+          src="https://i.ibb.co/tMmJ3FP3/akko-little-witch-pout.gif"
+          alt="Little bit angry"
+        >
+
+        <img
+          id="gif50"
+          class="emotion-gif"
+          src="https://i.ibb.co/yBNc8FH3/angry.gif"
+          alt="Moderately angry"
+        >
+
+        <img
+          id="gif75"
+          class="emotion-gif"
+          src="https://i.ibb.co/zVbRX3Hm/fiamani-cat.gif"
+          alt="Angry"
+        >
+
+        <img
+          id="gif100"
+          class="emotion-gif"
+          src="https://i.ibb.co/Z6kwt2xW/b04636d299ed07bbb69e61cc5027aac4.gif"
+          alt="Very angry"
+        >
+
+      </div>
+
+
+      <!-- PAGE 3 -->
+
+      <a
+        href="page3.html"
+        id="nextButton"
+        class="next-button"
+      >
+        Next <span>→</span>
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       MUSIC
+       ========================= -->
+
+  <button
+    id="musicToggle"
+    class="music-toggle paused"
+    aria-label="Toggle music"
+  >
+    🔈
+  </button>
+
+  <audio
+    id="bgMusic"
+    src="https://files.catbox.moe/mk050o.mp3"
+    preload="auto"
+  ></audio>
+
+
+  <script>
+
+    /* =========================
+       SLIDER
+       ========================= */
+
+    const slider =
+      document.getElementById("my-slider");
+
+    const sliderValue =
+      document.getElementById("slider-value");
+
+    const gifs = {
+      25: document.getElementById("gif25"),
+      50: document.getElementById("gif50"),
+      75: document.getElementById("gif75"),
+      100: document.getElementById("gif100")
+    };
+
+
+    function hideAllGifs() {
+
+      Object.values(gifs).forEach(function(gif) {
+        gif.classList.remove("active");
+      });
+
+    }
+
+
+    function updateSlider() {
+
+      const value = Number(slider.value);
+
+      hideAllGifs();
+
+
+      if (value === 0) {
+
+        sliderValue.textContent =
+          "Move the slider";
+
+        return;
+      }
+
+
+      if (value < 25) {
+
+        sliderValue.textContent =
+          value + "%";
+
+        return;
+      }
+
+
+      if (value < 50) {
+
+        sliderValue.textContent =
+          "25%";
+
+        gifs[25].classList.add("active");
+
+        return;
+      }
+
+
+      if (value < 75) {
+
+        sliderValue.textContent =
+          "50%";
+
+        gifs[50].classList.add("active");
+
+        return;
+      }
+
+
+      if (value < 100) {
+
+        sliderValue.textContent =
+          "75%";
+
+        gifs[75].classList.add("active");
+
+        return;
+      }
+
+
+      sliderValue.textContent =
+        "100%";
+
+      gifs[100].classList.add("active");
+    }
+
+
+    slider.addEventListener(
+      "input",
+      updateSlider
+    );
+
+
+    updateSlider();
+
+
+    /* =========================
+       MUSIC
+       ========================= */
+
+    const MUSIC_TIME_KEY =
+      "bgMusicTime";
+
+    const MUSIC_STATE_KEY =
+      "bgMusicState";
+
+
+    const audio =
+      document.getElementById("bgMusic");
+
+    const musicButton =
+      document.getElementById("musicToggle");
+
+    const nextButton =
+      document.getElementById("nextButton");
+
+
+    let savedTime =
+      parseFloat(
+        localStorage.getItem(
+          MUSIC_TIME_KEY
+        ) || "0"
+      );
+
+
+    let savedState =
+      localStorage.getItem(
+        MUSIC_STATE_KEY
+      ) || "paused";
+
+
+    function setMusicButton(state) {
+
+      if (state === "playing") {
+
+        musicButton.classList.remove(
+          "paused"
+        );
+
+        musicButton.textContent = "🔊";
+
+      } else {
+
+        musicButton.classList.add(
+          "paused"
+        );
+
+        musicButton.textContent = "🔈";
+
+      }
+
+    }
+
+
+    setMusicButton(savedState);
+
+
+    /* Restore music position */
+
+    audio.addEventListener(
+      "loadedmetadata",
+      function() {
+
+        if (
+          !isNaN(savedTime) &&
+          savedTime > 0 &&
+          savedTime < audio.duration
+        ) {
+
+          audio.currentTime =
+            savedTime;
+        }
+
+
+        /*
+          Try to continue music if it
+          was playing on Page 1.
+        */
+
+        if (savedState === "playing") {
+
+          const promise =
+            audio.play();
+
+          if (promise) {
+
+            promise.catch(function() {
+
+              /*
+                Browser may block
+                autoplay. User can
+                press the music button.
+              */
+
+              savedState = "paused";
+
+              setMusicButton(
+                "paused"
+              );
+
+            });
+
+          }
+
+        }
+
+      }
+    );
+
+
+    /* Music button */
+
+    musicButton.addEventListener(
+      "click",
+      function() {
+
+        if (audio.paused) {
+
+          audio.play()
+            .then(function() {
+
+              savedState = "playing";
+
+              setMusicButton(
+                "playing"
+              );
+
+              localStorage.setItem(
+                MUSIC_STATE_KEY,
+                "playing"
+              );
+
+            })
+            .catch(function() {
+
+              savedState = "paused";
+
+              setMusicButton(
+                "paused"
+              );
+
+            });
+
+        } else {
+
+          audio.pause();
+
+          savedState = "paused";
+
+          setMusicButton(
+            "paused"
+          );
+
+          localStorage.setItem(
+            MUSIC_STATE_KEY,
+            "paused"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* Save music */
+
+    function saveMusicState() {
+
+      localStorage.setItem(
+        MUSIC_TIME_KEY,
+        String(audio.currentTime)
+      );
+
+      localStorage.setItem(
+        MUSIC_STATE_KEY,
+        audio.paused
+          ? "paused"
+          : "playing"
+      );
+
+    }
+
+
+    /*
+      IMPORTANT:
+      Save immediately when clicking
+      Next → before Page 3 opens.
+    */
+
+    nextButton.addEventListener(
+      "click",
+      function() {
+
+        saveMusicState();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "beforeunload",
+      saveMusicState
+    );
+
+
+    document.addEventListener(
+      "visibilitychange",
+      function() {
+
+        if (
+          document.visibilityState ===
+          "hidden"
+        ) {
+
+          saveMusicState();
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
